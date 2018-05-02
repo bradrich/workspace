@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-xs">
+  <span class="navbar-brand sf-fade-in-left">{{appConstants.appName}}</span>
+</nav>
+
+<sf-spinner class="sf-fade-in" type="foldingCubes" *ngIf="userPending"></sf-spinner>
+
+<section fxFlex class="sf-sidenav-content" *ngIf="!userPending">
+
+  <!-- Sections -->
+  <ul class="nav sf-sidenav-list">
+    <li class="nav-item sf-fade-in-left" *ngFor="let section of sections">
+
+      <h2 class="sf-sidenav-subhead" *ngIf="section.type === 'heading'">
+        {{section.name | async}}
+      </h2>
+
+      <sf-sidenav-link
+        [section]="section"
+        *ngIf="section.type === 'link' && !(section.isHidden | async)">
+      </sf-sidenav-link>
+      <sf-sidenav-function-link
+        [section]="section"
+        *ngIf="section.type === 'function' && !(section.isHidden | async)">
+      </sf-sidenav-function-link>
+      <sf-sidenav-toggle-link
+        [section]="section"
+        *ngIf="section.type === 'toggle' && !(section.isHidden | async)">
+      </sf-sidenav-toggle-link>
+
+    </li>
+  </ul>
+  <!-- End sections -->
+
+</section>
+<!-- <section></section> -->
+<section class="sf-sidenav-footer" *ngIf="!userPending">
+
+  <ul class="nav sf-sidenav-list">
+
+    <!-- Account sections -->
+    <li class="nav-item sf-fade-in-left" *ngFor="let accountSection of accountSections">
+      <sf-sidenav-toggle-link
+        [section]="accountSection"
+        *ngIf="userAuthenticated && accountSection.type === 'toggle' && !(accountSection.isHidden | async)">
+      </sf-sidenav-toggle-link>
+    </li>
+    <!-- End account sections -->
+
+    <!-- Sign in -->
+    <li class="nav-item sf-fade-in-left" *ngFor="let signInSection of signInSections">
+      <sf-sidenav-link
+        [section]="signInSection"
+        *ngIf="!userAuthenticated && signInSection.type === 'link' && !(signInSection.isHidden | async)">
+      </sf-sidenav-link>
+      <sf-sidenav-function-link
+        [section]="signInSection"
+        *ngIf="!userAuthenticated && signInSection.type === 'function' && !(signInSection.isHidden | async)">
+      </sf-sidenav-function-link>
+    </li>
+    <!-- End sign in -->
+
+  </ul>
+
+</section>

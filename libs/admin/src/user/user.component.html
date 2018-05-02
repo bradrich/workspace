@@ -1,0 +1,78 @@
+<sf-spinner
+  type="foldingCube"
+  *ngIf="(pending$ | async) && !(refreshing$ | async) && !(error$ | async)">
+</sf-spinner>
+
+<div
+  class="container-fluid m-0"
+  *ngIf="(!(pending$ | async) || (refreshing$ | async)) && (users$ | async)?.length && !(error$ | async)">
+  <div class="row">
+    <div class="col">
+
+      <!-- Content card -->
+      <div class="card sf-content-card sf-fade-in-up">
+        <div class="card-body">
+
+          <sf-table
+            class="d-flex flex-column"
+            [config]="tableConfig"
+            title="Users"
+            [entities]="users$ | async"
+            [specialEntity]="currentUser$ | async"
+            [totalItems]="totalCount$ | async"
+            [predicate]="predicate"
+            [reverse]="reverse"
+            (sort)="sortUsers($event)"
+            showDeleteEntities="true"
+            (deleteEntities)="deleteUsers($event)"
+            showCreateEntity="true"
+            (createEntity)="createUser()"
+            [selectedEntities]="selectedUsers$ | async"
+            (selectEntities)="selectUsers($event)"
+            (buttonClick)="buttonClick($event)"
+            (actionMenuClick)="actionMenuClick($event)">
+          </sf-table>
+
+          <sf-pagination
+            class="d-flex flex-row align-items-center justify-content-end flex-wrap mt-4"
+            type="slim"
+            [totalItems]="totalCount$ | async"
+            [itemsPerPage]="itemsPerPage"
+            [page]="page"
+            (transition)="changePaging($event)">
+          </sf-pagination>
+
+        </div>
+      </div>
+      <!-- End content card -->
+
+    </div>
+  </div>
+</div>
+
+<!-- Edit/add panel -->
+<sf-user-edit
+  sfEditPanel
+  class="sf-fade-in-left"
+  [users]="selectedUsers$ | async"
+  [currentUser]="currentUser$ | async"
+  (requestUserListRefresh)="refreshUserList($event)"
+  (cancelEdit)="cancelEdit($event)"
+  (deleteUsers)="deleteUsers($event)"
+  *ngIf="(selectedUsers$ | async)?.length && !(error$ | async)">
+</sf-user-edit>
+<!-- End edit/add panel -->
+
+<!-- No results -->
+<sf-no-results
+  class="sf-fade-in-up"
+  title="No users"
+  showCreateEntity="true"
+  (createEntity)="createUser()"
+  *ngIf="!(pending$ | async) && !(users$ | async)?.length && !(error$ | async)">
+</sf-no-results>
+<!-- End no results -->
+
+<!-- Error -->
+<sf-error class="sf-fade-in-up" *ngIf="!(pending$ | async) && (error$ | async)"></sf-error>
+<!-- End error -->

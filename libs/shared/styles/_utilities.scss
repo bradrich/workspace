@@ -1,0 +1,46 @@
+/* =================================================================================================
+Utilities
+================================================================================================= */
+
+// Borders
+@mixin sf-border-radius() {
+  @each $direction in $sf-border-radius-directions {
+    .sf-border-#{$direction}-radius {
+      border-#{$direction}-radius: $border-radius !important;
+    }
+  }
+}
+
+@include sf-border-radius();
+
+// Cursors
+.sf-cursor-pointer {
+  cursor: $sf-cursor-pointer;
+}
+.sf-cursor-grab {
+  cursor: $sf-cursor-move;
+  cursor: $sf-cursor-grab;
+  &:active {
+    cursor: grabbing;
+  }
+}
+.sf-cursor-default {
+  cursor: $sf-cursor-default !important;
+  &.mat-button mat-icon {
+    cursor: $sf-cursor-default !important;
+  }
+}
+.sf-cursor-not-allowed {
+  cursor: $sf-cursor-not-allowed !important;
+}
+
+// Elevation
+@mixin sf-elevation() {
+  @each $elevation in $sf-elevations {
+    .sf-elevation-#{$elevation} {
+      @include mat-elevation($elevation);
+    }
+  }
+}
+
+@include sf-elevation();

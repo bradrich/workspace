@@ -1,0 +1,55 @@
+/* =================================================================================================
+Table head row
+================================================================================================= */
+
+@import
+  'shared/styles/variables',
+  'shared/styles/mixins',
+  '@angular/material/theming',
+  'bootstrap/scss/functions',
+  'bootstrap/scss/variables',
+  'bootstrap/scss/mixins';
+
+:host {
+  display: table-row-group;
+
+  > tr > th {
+    border-bottom: solid 2px $primary;
+  }
+  > tr:first-child {
+    > th, > td {
+      border-top: 0;
+    }
+  }
+  th {
+    &.sf-sort-by {
+      cursor: pointer;
+      &:hover {
+        .sf-th-icon-container mat-icon {
+          opacity: 1;
+        }
+      }
+      &.sf-reverse {
+        .sf-th-icon-container mat-icon {
+          transform: rotate(0deg);
+        }
+      }
+      .sf-th-icon-container {
+        padding-left: 4px;
+        vertical-align: middle;
+        line-height: 1rem;
+        mat-icon {
+          min-width: 1rem;
+          min-height: 1rem;
+          width: 1rem;
+          height: 1rem;
+          font-size: 1rem;
+          opacity: 0.5;
+          transition: $swift-ease-out;
+          transition-property: all;
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

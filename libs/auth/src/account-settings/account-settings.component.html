@@ -1,0 +1,88 @@
+<sf-spinner type="foldingCube" *ngIf="loading"></sf-spinner>
+
+<div class="container-fluid" *ngIf="!loading && account">
+  <div class="row">
+    <div class="col">
+
+      <!-- Content card -->
+      <div class="card sf-content-card sf-fade-in-up">
+        <div class="card-body">
+
+          <form [formGroup]="form" (submit)="submit()" role="Account Settings Form">
+
+            <div class="form-row">
+              <div class="col">
+
+                <!-- First name -->
+                <div class="form-group">
+                  <label for="firstName">First name</label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    class="form-control"
+                    formControlName="firstName"
+                    required
+                    tabindex="1" />
+                  <sf-error-messages [group]="form" controlName="firstName"></sf-error-messages>
+                </div>
+                <!-- End first name -->
+
+              </div>
+              <div class="col">
+
+                <!-- Last name -->
+                <div class="form-group">
+                  <label for="lastName">Last name</label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    class="form-control"
+                    formControlName="lastName"
+                    required
+                    tabindex="2" />
+                  <sf-error-messages [group]="form" controlName="lastName"></sf-error-messages>
+                </div>
+                <!-- End last name -->
+
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="your_name@domain.com"
+                required
+                tabindex="3" />
+              <sf-error-messages [group]="form" controlName="email"></sf-error-messages>
+            </div>
+            <!-- End email -->
+
+            <sf-form-buttons
+              class="d-flex flex-column flex-md-row align-items-md-center"
+              [group]="form"
+              [isSaving]="pending$ | async"
+              (save)="submit()"
+              (cancel)="cancel()">
+            </sf-form-buttons>
+
+          </form>
+
+        </div>
+      </div>
+      <!-- End content card -->
+
+    </div>
+  </div>
+</div>
+
+<sf-error
+  title="Error"
+  message="There is no current account."
+  showRefresh="false"
+  *ngIf="!loading && !account">
+</sf-error>

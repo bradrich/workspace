@@ -1,0 +1,80 @@
+<form [formGroup]="form" (submit)="save()" role="Quick Add Form" *ngIf="showQuickAddForm">
+
+  <td *ngFor="let column of (config.columns | filter:true:'show'); let $index = index;">
+
+    <span *ngIf="showTextInput(column)">
+      <input
+        class="form-control"
+        [type]="column.quickAddFormOptions?.inputType || 'text'"
+        [formControlName]="column.model"
+        [placeholder]="column.header"
+        [required]="column.quickAddFormOptions?.required"
+        [pattern]="column.quickAddFormOptions?.inputPattern"
+        [min]="column.quickAddFormOptions?.inputMin"
+        [max]="column.quickAddFormOptions?.inputMax" />
+    </span>
+
+    <span *ngIf="showSelectInput(column)">
+
+      <select
+        class="form-control"
+        [formControlName]="column.model"
+        [required]="column.quickAddFormOptions?.required"
+        *ngIf="!column.quickAddFormOptions?.selectIsObservable">
+        <option *ngFor="let option of column.quickAddFormOptions.selectOptions" [value]="option">
+          {{option}}
+        </option>
+      </select>
+
+      <select
+        class="form-control"
+        [formControlName]="column.quickAddFormOptions?.controlOverride || column.model"
+        [required]="column.quickAddFormOptions?.required"
+        *ngIf="column.quickAddFormOptions?.selectIsObservable">
+        <div *ngIf="column.quickAddFormOptions?.selectSearch">
+          <input
+            class="form-control"
+            type="text"
+            #searchInput
+            placeholder="Search"
+            (keyup)="column.quickAddFormOptions?.selectSearch(searchInput.value)" />
+        </div>
+        <option
+          *ngFor="let option of column.quickAddFormOptions?.selectOptions | async"
+          [value]="column.quickAddFormOptions?.selectValueOverride(option) || option">
+          {{column.quickAddFormOptions?.selectLabelOverride(option) || option}}
+        </option>
+      </select>
+
+    </span>
+
+    <button
+      class="btn btn-icon m-0"
+      [ngClass]="'btn-' + column.button.color(quickAddModel)"
+      (click)="form.get(column.model).setValue(!quickAddForm.get(column.model).value)"
+      [ngbTooltip]="column.tooltip(quickAddModel)"
+      placement="bottom"
+      container="body"
+      *ngIf="column.type === 'button' && !column.quickAddFormOptions?.hide">
+      <mat-icon>{{column.button.icon(quickAddModel)}}</mat-icon>
+    </button>
+
+    <sf-form-buttons
+      class="d-flex flex-row align-items-center justify-content-end mr-1"
+      [formGroup]="form"
+      useIcons="true"
+      (save)="save($event)"
+      [isSaving]="isQuickAddSaving"
+      (cancel)="cancel($event)"
+      *ngIf="column.type === 'menu' && !isQuickAddSaving">
+    </sf-form-buttons>
+
+    <mat-progress-spinner
+      mode="indeterminate"
+      class="sf-search-progress mr-2"
+      *ngIf="column.type === 'menu' && isQuickAddSaving">
+    </mat-progress-spinner>
+
+  </td>
+
+</form>

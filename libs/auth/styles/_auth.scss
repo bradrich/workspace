@@ -1,0 +1,97 @@
+/* =================================================================================================
+Auth
+================================================================================================= */
+
+.sf-auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  flex-direction: column;
+
+  .mat-drawer-content {
+    background-color: transparent !important;
+  }
+}
+
+.sf-auth {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+
+.sf-auth-dialog .mat-dialog-container {
+  padding: 0;
+  > *:first-child {
+    display: block;
+  }
+}
+
+.sf-auth, .sf-auth-dialog .mat-dialog-container > *:first-child {
+  border-top-right-radius: $border-radius;
+  border-top-left-radius: $border-radius;
+  background-color: $gray-100;
+  text-align: center;
+
+  .sf-auth-image {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    padding: 40px 40px 0;
+    width: 100%;
+    height: 90px;
+    border-bottom: solid 3px $primary;
+  }
+
+  .sf-auth-content {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 40px 40px 3px;
+    background-color: $gray-150;
+
+    h1 {
+      margin: 0;
+      color: $gray-850;
+      font-size: $h5-font-size;
+    }
+    p.tag {
+      margin: 2px 0 11px;
+      color: $gray-500;
+    }
+    form {
+      text-align: left;
+      > :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+button.forgot {
+  margin: 0;
+  padding: 0;
+  min-height: 50px;
+  width: 350px;
+  height: 50px;
+  border-radius: 0;
+  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+  background-color: $gray-300;
+  color: $gray-700 !important;
+  line-height: 50px;
+  &:hover {
+    background-color: $gray-400;
+  }
+}
+
+.sf-auth-version {
+  margin-top: 26px;
+
+  p {
+    margin: 0 !important;
+    color: $gray-100;
+    font-size: $font-size-sm;
+  }
+}

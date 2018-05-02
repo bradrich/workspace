@@ -1,0 +1,128 @@
+/* =================================================================================================
+Sidenav
+================================================================================================= */
+
+@import
+  'shared/styles/variables',
+  'shared/styles/mixins',
+  '@angular/material/theming',
+  'bootstrap/scss/functions',
+  'bootstrap/scss/variables',
+  'bootstrap/scss/mixins';
+
+.sf-sidenav {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100%;
+  background-color: $body-bg;
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    width: 300px;
+  }
+
+  // Header navbar
+  .navbar {
+    padding: 0.75rem 2rem;
+    background-color: $gray-850;
+    color: $gray-100;
+  }
+
+  // Main section
+  .sf-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  // Nav lists
+  .sf-sidenav-list {
+    .nav-item {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  // Toggle lists
+  .sf-sidenav-toggle-list {
+    .nav-link {
+      padding-left: calc(4rem + 1rem / 2);
+      &.active {
+        padding-left: calc(4rem + 1rem / 2 - 5px);
+      }
+    }
+  }
+
+  // Collapse
+  .collapse {
+    display: none !important;
+    &.show {
+      display: flex !important;
+    }
+  }
+
+  // Links
+  button.nav-link {
+    margin-right: 0;
+    width: 100%;
+    border: none;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 9px 1rem 10px 2rem;
+    color: $gray-300 !important;
+    font-weight: 400;
+    font-size: $font-size-sm;
+    &:hover, &:focus, &.active {
+      background-color: $gray-950;
+      color: $gray-100 !important;
+    }
+    &.active {
+      padding-left: calc(2rem - 5px);
+      border-left: solid 5px $primary;
+      border-bottom-left-radius: $border-radius;
+      border-top-left-radius: $border-radius;
+    }
+    &[aria-expanded=true] {
+      .mat-icon.sf-sidenav-toggle-icon {
+        transform: rotate(0deg);
+      }
+    }
+
+    .mat-icon {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+      line-height: 18px;
+      &.sf-sidenav-toggle-icon {
+        margin-right: 0;
+        transition: $swift-ease-out;
+        transition-property: transform;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  // Footer
+  .sf-sidenav-footer {
+    .nav-link {
+      background-color: $gray-850;
+      &:hover, &:focus {
+        background-color: $body-bg;
+      }
+      &.active {
+        background-color: $gray-950;
+      }
+      &.sf-sidenav-toggle-button {
+        padding-top: 21px;
+        padding-bottom: 22px;
+        &:hover, &:focus {
+          background-color: $gray-850;
+        }
+      }
+    }
+  }
+}

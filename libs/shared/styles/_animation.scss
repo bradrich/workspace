@@ -1,0 +1,108 @@
+/* stylelint-disable */
+
+/* =================================================================================================
+Animate
+================================================================================================= */
+
+/* Attention seekers */
+.sf-bounce                 { @include bounce(); }
+.sf-flash                  { @include flash(); }
+.sf-jello                  { @include jello(); }
+.sf-pulse                  { @include pulse(); }
+.sf-rubber-band            { @include rubberBand(); }
+.sf-shake                  { @include shake(); }
+.sf-swing                  { @include swing(); }
+.sf-tada                   { @include tada(); }
+.sf-wobble                 { @include wobble(); }
+
+/* Bouncing entrances */
+.sf-bounce-in              { @include bounceIn(); }
+.sf-bounce-in-up           { @include bounceInUp(); }
+.sf-bounce-in-right        { @include bounceInRight(); }
+.sf-bounce-in-down         { @include bounceInDown(); }
+.sf-bounce-in-left         { @include bounceInLeft(); }
+
+/* Bouncing exits */
+.sf-bounce-out             { @include bounceOut(); }
+.sf-bounce-out-up          { @include bounceOutUp(); }
+.sf-bounce-out-right       { @include bounceOutRight(); }
+.sf-bounce-out-down        { @include bounceOutDown(); }
+.sf-bounce-out-left        { @include bounceOutLeft(); }
+
+/* Fading entrances */
+.sf-fade-in                { @include fadeIn(); }
+.sf-fade-in-up             { @include fadeInUp(); }
+.sf-fade-in-up-big         { @include fadeInUpBig(); }
+.sf-fade-in-right          { @include fadeInRight(); }
+.sf-fade-in-right-big      { @include fadeInRightBig(); }
+.sf-fade-in-down           { @include fadeInDown(); }
+.sf-fade-in-down-big       { @include fadeInDownBig(); }
+.sf-fade-in-left           { @include fadeInLeft(); }
+.sf-fade-in-left-big       { @include fadeInLeftBig(); }
+
+/* Fading exits */
+.sf-fade-out               { @include fadeOut(); }
+.sf-fade-out-up            { @include fadeOutUp(); }
+.sf-fade-out-up-big        { @include fadeOutUpBig(); }
+.sf-fade-out-right         { @include fadeOutRight(); }
+.sf-fade-out-right-big     { @include fadeOutRightBig(); }
+.sf-fade-out-down          { @include fadeOutDown(); }
+.sf-fade-out-down-big      { @include fadeOutDownBig(); }
+.sf-fade-out-left          { @include fadeOutLeft(); }
+.sf-fade-out-left-big      { @include fadeOutLeftBig(); }
+
+/* Flippers */
+.sf-flip                   { @include flip(); }
+.sf-flip-in-x              { @include flipInX(); }
+.sf-flip-in-y              { @include flipInY(); }
+.sf-flip-out-x             { @include flipOutX(); }
+.sf-flip-out-y             { @include flipOutY(); }
+
+/* Lightspeed */
+.sf-lightspeed-in          { @include lightSpeedIn(); }
+.sf-lightspeed-out         { @include lightSpeedOut(); }
+
+/* Rotating entrances */
+.sf-rotate-in              { @include rotateIn(); }
+.sf-rotate-in-up-right     { @include rotateInUpRight(); }
+.sf-rotate-in-up-left      { @include rotateInUpLeft(); }
+.sf-rotate-in-down-right   { @include rotateInDownRight(); }
+.sf-rotate-in-down-left    { @include rotateInDownLeft(); }
+
+/* Rotating exits */
+.sf-rotate-out             { @include rotateOut(); }
+.sf-rotate-out-up-right    { @include rotateOutUpRight(); }
+.sf-rotate-out-up-left     { @include rotateOutUpLeft(); }
+.sf-rotate-out-down-right  { @include rotateOutDownRight(); }
+.sf-rotate-out-down-left   { @include rotateOutDownLeft(); }
+
+/* Sliding entrances */
+.sf-slide-in-up            { @include slideInUp(); }
+.sf-slide-in-right         { @include slideInRight(); }
+.sf-slide-in-down          { @include slideInDown(); }
+.sf-slide-in-left          { @include slideInLeft(); }
+
+/* Sliding exits */
+.sf-slide-out-up           { @include slideOutUp(); }
+.sf-slide-out-right        { @include slideOutRight(); }
+.sf-slide-out-down         { @include slideOutDown(); }
+.sf-slide-out-left         { @include slideOutLeft(); }
+
+/* Specials */
+.sf-hinge                  { @include hinge(); }
+.sf-roll-in                { @include rollIn(); }
+.sf-roll-out               { @include rollOut(); }
+
+/* Zooming entrances */
+.sf-zoom-in                { @include zoomIn(); }
+.sf-zoom-in-up             { @include zoomInUp(); }
+.sf-zoom-in-right          { @include zoomInRight(); }
+.sf-zoom-in-down           { @include zoomInDown(); }
+.sf-zoom-in-left           { @include zoomInLeft(); }
+
+/* Zooming exits */
+.sf-zoom-out               { @include zoomOut(); }
+.sf-zoom-out-up            { @include zoomOutUp(); }
+.sf-zoom-out-right         { @include zoomOutRight(); }
+.sf-zoom-out-down          { @include zoomOutDown(); }
+.sf-zoom-out-left          { @include zoomOutLeft(); }

@@ -14,6 +14,22 @@
     {
       "project": "./tsconfig.spec.json",
       "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "apps/fil/src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "apps/fil/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "apps/billflash/src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "apps/billflash/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
     }
   ],
   "test": {
@@ -22,6 +38,99 @@
     }
   },
   "apps": [
+    {
+      "name": "billflash",
+      "root": "apps/billflash/src",
+      "outDir": "dist/apps/billflash",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "../../../tsconfig.spec.json",
+      "prefix": "bf",
+      "styles": [
+        "styles.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      },
+      "tags": []
+    },
+    {
+      "name": "fil",
+      "root": "apps/fil/src",
+      "outDir": "dist/apps/fil",
+      "assets": [
+        "assets",
+        "../../../libs/shared/assets",
+        "favicon.ico",
+        {
+          "glob": "loading.css",
+          "input": "../../../libs/shared/src/loading/",
+          "output": "./",
+          "allowOutsideOutDir": false
+        }
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "../../../tsconfig.spec.json",
+      "prefix": "fil",
+      "styles": [
+        "styles/global.scss"
+      ],
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "styles/shared",
+          "../../../libs",
+          "../../../node_modules"
+        ]
+      },
+      "scripts": [
+        "../../../node_modules/jquery/dist/jquery.min.js",
+        "../../../node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      },
+      "tags": []
+    },
+    {
+      "name": "admin",
+      "root": "libs/admin/src",
+      "test": "../../../test.js",
+      "prefix": "sf",
+      "appRoot": "",
+      "tags": []
+    },
+    {
+      "name": "auth",
+      "root": "libs/auth/src",
+      "test": "../../../test.js",
+      "prefix": "sf",
+      "appRoot": "",
+      "tags": []
+    },
+    {
+      "name": "shared",
+      "root": "libs/shared/src",
+      "test": "../../../test.js",
+      "prefix": "sf",
+      "appRoot": "",
+      "tags": []
+    },
     {
       "name": "$workspaceRoot",
       "root": ".",
@@ -32,10 +141,11 @@
     "schematics": {
       "collection": "@nrwl/schematics"
     },
-    "styleExt": "css",
+    "styleExt": "scss",
     "component": {}
   },
   "warnings": {
     "typescriptMismatch": false
-  }
+  },
+  "packageManager": "yarn"
 }

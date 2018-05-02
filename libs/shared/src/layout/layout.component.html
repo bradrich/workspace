@@ -1,0 +1,40 @@
+<ng-progress [showSpinner]="false" [color]="appConstants.appColors[0]"></ng-progress>
+
+<mat-sidenav-container [ngClass]="{ 'sf-auth-container': isAuthRoute }">
+
+  <mat-sidenav
+    #sidenav
+    position="start"
+    [mode]="sidenavMode"
+    [opened]="sidenavOpened"
+    *ngIf="!isAuthRoute">
+    <sf-sidenav
+      class="sf-sidenav"
+      [userPending]="userPending"
+      [userAuthenticated]="userAuthenticated"
+      [sidenavModel]="sidenavModel">
+    </sf-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="flex-column">
+
+    <sf-header
+      class="navbar"
+      [ngClass]="{ 'sf-sidenav-opened': sidenavOpened }"
+      [siteDisplayName]="siteDisplayName"
+      *ngIf="!isAuthRoute">
+    </sf-header>
+
+    <div class="sf-content-container" fxFlex>
+
+      <div class="sf-content" fxFlex="noshrink">
+        <ng-content></ng-content>
+      </div>
+
+      <sf-footer class="navbar" *ngIf="!isAuthRoute"></sf-footer>
+
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

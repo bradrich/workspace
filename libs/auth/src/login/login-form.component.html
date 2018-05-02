@@ -1,0 +1,50 @@
+<form [formGroup]="form" (submit)="submit()" role="Login Form">
+
+  <!-- Username -->
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input
+      id="username"
+      type="text"
+      class="form-control"
+      formControlName="username"
+      tabindex="1"
+      required />
+    <sf-error-messages [group]="form" controlName="username"></sf-error-messages>
+  </div>
+  <!-- End username -->
+
+  <!-- Password -->
+  <div class="form-group">
+    <label for="password">Password</label>
+    <div class="input-group">
+      <input
+        id="password"
+        [attr.type]="credentials.isPasswordType ? 'password' : 'text'"
+        class="form-control"
+        formControlName="password"
+        tabindex="2"
+        required />
+      <div class="input-group-append">
+        <button
+          type="button"
+          class="btn input-group-text"
+          (click)="credentials.isPasswordType = !credentials.isPasswordType">
+          <mat-icon>{{credentials.isPasswordType ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
+      </div>
+    </div>
+    <sf-error-messages [group]="form" controlName="password"></sf-error-messages>
+  </div>
+  <!-- End password -->
+
+  <button
+    type="submit"
+    class="btn btn-primary w-100 mt-3 mb-4"
+    tabindex="3"
+    [disabled]="form.invalid || form.pristine || (pending$ | async)">
+    <span *ngIf="!(pending$ | async)">Sign in</span>
+    <sf-spinner type="wave" *ngIf="pending$ | async"></sf-spinner>
+  </button>
+
+</form>

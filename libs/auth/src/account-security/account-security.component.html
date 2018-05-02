@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+
+      <!-- Content card -->
+      <div class="card sf-content-card sf-fade-in-up">
+        <div class="card-body">
+
+          <form [formGroup]="form" (submit)="submit()" role="Security Form">
+
+            <!-- Password -->
+            <div class="form-group">
+              <label for="password">New Password</label>
+              <div class="input-group">
+                <input
+                  id="password"
+                  [attr.type]="isPasswordType ? 'password' : 'text'"
+                  class="form-control"
+                  formControlName="password"
+                  required
+                  tabindex="1" />
+                <div class="input-group-append">
+                  <button
+                    type="button"
+                    class="btn input-group-text sf-border-top-right-radius sf-border-bottom-right-radius"
+                    (click)="isPasswordType = !isPasswordType">
+                    <mat-icon>{{isPasswordType ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  </button>
+                  <sf-password-strength></sf-password-strength>
+                </div>
+              </div>
+              <sf-error-messages [group]="form" controlName="password"></sf-error-messages>
+            </div>
+            <!-- End password -->
+
+            <!-- Confirm password -->
+            <div class="form-group">
+              <label for="confirmPassword">
+                Confirm password
+                <mat-icon
+                  class="sf-icon-sm"
+                  ngbTooltip="Input must match password above"
+                  placement="bottom"
+                  container="body">
+                  help
+                </mat-icon>
+              </label>
+              <input
+                id="confirmPassword"
+                [attr.type]="isPasswordType ? 'password' : 'text'"
+                class="form-control"
+                formControlName="confirmPassword"
+                required
+                tabindex="2" />
+              <sf-error-messages [group]="form" controlName="password"></sf-error-messages>
+            </div>
+            <!-- End confirm password -->
+
+            <sf-form-buttons
+              class="d-flex flex-column flex-md-row align-items-md-center"
+              [group]="form"
+              [isSaving]="pending$ | async"
+              (save)="submit()"
+              (cancel)="cancel()">
+            </sf-form-buttons>
+
+          </form>
+
+        </div>
+      </div>
+      <!-- End content card -->
+
+    </div>
+  </div>
+</div>

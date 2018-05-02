@@ -1,0 +1,1 @@
+export const languageDefaultKey = 'en';

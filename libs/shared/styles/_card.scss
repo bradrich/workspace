@@ -1,0 +1,23 @@
+/* =================================================================================================
+Card
+================================================================================================= */
+
+.sf-content-card {
+  @include mat-elevation(2);
+
+  &.sf-content-overflow {
+    max-height: 100%;
+
+    .card-body {
+      overflow-x: auto;
+    }
+  }
+
+  .card-header {
+    border-top-right-radius: $border-radius;
+    border-top-left-radius: $border-radius;
+  }
+  .card-body {
+    padding: 35px 40px;
+  }
+}

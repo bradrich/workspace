@@ -1,0 +1,23 @@
+/* =================================================================================================
+Color picker input
+================================================================================================= */
+
+@import
+  'shared/styles/variables',
+  'shared/styles/mixins',
+  '@angular/material/theming',
+  'bootstrap/scss/functions',
+  'bootstrap/scss/variables',
+  'bootstrap/scss/mixins';
+
+.sf-color {
+  margin: 6px;
+  border-width: 0;
+
+  @include mat-elevation(2);
+
+  &.sf-color-selected {
+    margin: 0;
+    border-width: 6px;
+  }
+}

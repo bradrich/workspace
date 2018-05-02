@@ -1,0 +1,45 @@
+<div class="d-flex flex-column align-items-center justify-content-center sf-fade-in-up" fxFlex>
+
+  <div class="sf-auth">
+    <div class="sf-auth-image">
+      <img [src]="assets.swampfoxLogoAuth" alt="Swampfox" width="175" />
+    </div>
+    <div class="sf-auth-content">
+
+      <h1>{{constants.appAbbreviation.toUpperCase()}} - Dashboard</h1>
+      <p class="tag">Reset your password</p>
+
+      <!-- Key missing alert -->
+      <ngb-alert [dismissable]="false" type="danger" class="mb-3" *ngIf="keyMissing">
+        <h5 class="alert-heading">Missing key</h5>
+        <p class="mb-0">You do not have a valid account activation key.</p>
+      </ngb-alert>
+      <!-- End key missing alert -->
+
+      <!-- Error alert -->
+      <ngb-alert [dismissible]="false" type="danger" class="mb-3" *ngIf="error$ | async">
+        <strong>Your account could not be activated.</strong> Please use the registration form to
+        create an account.
+      </ngb-alert>
+      <!-- End error alert -->
+
+      <!-- Success alert -->
+      <ngb-alert [dismissible]="false" type="success" class="mb-3" *ngIf="success$ | async">
+        <strong>Your account has been activated!</strong> Please sign in by clicking the button
+        below.
+      </ngb-alert>
+      <!-- End success alert -->
+
+    </div>
+  </div>
+
+  <button class="btn btn-forgot" [routerLink]="(success$ | async) ? '/login' : '/register'">
+    <span *ngIf="success$ | async">Sign in</span>
+    <span *ngIf="(error$ | async) || keyMissing">Register</span>
+  </button>
+
+  <div class="sf-auth-version">
+    <p>Version {{constants.appVersion}}</p>
+  </div>
+
+</div>

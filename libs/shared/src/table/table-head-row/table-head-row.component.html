@@ -1,0 +1,28 @@
+<tr>
+
+  <th
+    *ngFor="let column of (columns | filter:true:'show'); let $index = index"
+    [ngClass]="getColumnClass(column)"
+    (click)="column && column.isSortable ? sort.emit(column.model) : null">
+
+    <span *ngIf="getShowColumnHeader(column)">{{column.header}}</span>
+
+    <span
+      class="sf-th-icon-container"
+      [hidden]="column.model !== predicate"
+      *ngIf="column.isSortable">
+      <mat-icon>arrow_upward</mat-icon>
+    </span>
+
+    <mat-checkbox
+      color="info"
+      (change)="$event ? selectEntities.emit({}) : null"
+      [checked]="selectionModel.hasValue() && areAllEntitiesSelected"
+      [indeterminate]="selectionModel.hasValue() && !areAllEntitiesSelected"
+      aria-label="Select all"
+      *ngIf="column.type === 'selection'">
+    </mat-checkbox>
+
+  </th>
+
+</tr>

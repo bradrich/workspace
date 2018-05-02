@@ -1,0 +1,120 @@
+<div class="d-flex flex-column align-items-center justify-content-center sf-fade-in-up" fxFlex>
+
+  <div class="sf-auth">
+    <div class="sf-auth-image">
+      <img [src]="assets.swampfoxLogoAuth" alt="Swampfox" width="175" />
+    </div>
+    <div class="sf-auth-content">
+
+      <h1>{{constants.appAbbreviation.toUpperCase()}} - Dashboard</h1>
+      <p class="tag">Register your account</p>
+
+      <!-- Success alert -->
+      <ngb-alert [dismissible]="false" type="success" class="mb-3" *ngIf="success$ | async">
+        <strong>Your account has been registered!</strong> Please check your email for confirmation.
+      </ngb-alert>
+      <!-- End success alert -->
+
+      <form
+        [formGroup]="form"
+        (submit)="submit()"
+        *ngIf="!(success$ | async)"
+        role="Register form">
+
+        <!-- Login -->
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input
+            id="login"
+            type="text"
+            formControlName="login"
+            required
+            tabindex="1" />
+          <sf-error-messages [group]="form" controlName="login"></sf-error-messages>
+        </div>
+        <!-- End login -->
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="login">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            required
+            tabindex="2" />
+          <sf-error-messages [group]="form" controlName="email"></sf-error-messages>
+        </div>
+        <!-- End email -->
+
+        <div class="d-flex flex-row align-items-center">
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password">New Password</label>
+            <div class="input-group">
+              <input
+                id="password"
+                [attr.type]="isPasswordType ? 'password' : 'text'"
+                class="form-control"
+                formControlName="password"
+                required
+                tabindex="3" />
+              <div class="input-group-append">
+                <button
+                  type="button"
+                  class="btn input-group-text"
+                  (click)="isPasswordType = !isPasswordType">
+                  <mat-icon>{{isPasswordType ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </button>
+              </div>
+            </div>
+            <sf-error-messages [group]="form" controlName="password"></sf-error-messages>
+          </div>
+          <!-- End password -->
+
+          <!-- Password strength -->
+          <sf-password-strength></sf-password-strength>
+          <!-- End password strength -->
+
+        </div>
+
+        <!-- Confirm password -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm password</label>
+          <input
+            id="confirmPassword"
+            [attr.type]="isPasswordType ? 'password' : 'text'"
+            class="form-control"
+            formControlName="confirmPassword"
+            required
+            tabindex="4" />
+          <sf-error-messages [group]="form" controlName="confirmPassword"></sf-error-messages>
+        </div>
+        <!-- End confirm password -->
+
+        <button
+          type="submit"
+          class="btn btn-primary w-100 mt-3 mb-4"
+          [disabled]="form.invalid || form.pristine">
+          Register
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <button
+    class="forgot"
+    routerLink="/login"
+    [attr.aria-label]="(success$ | async) ? 'Sign in' : 'Cancel'">
+    <span *ngIf="success$ | async">Sign in</span>
+    <span *ngIf="!(success$ | async)">Cancel</span>
+  </button>
+
+  <div class="sf-auth-version">
+    <p>Version {{constants.appVersion}}</p>
+  </div>
+
+</div>

@@ -1,0 +1,38 @@
+/* =================================================================================================
+Theming
+================================================================================================= */
+
+// Themes an element's borders.
+@mixin sf-border-theming() {
+  @each $color, $value in $theme-colors {
+    &.sf-#{$color}-border,
+    &.sf-#{$color}-lighter-border,
+    &.sf-#{$color}-darker-border {
+      border-width: 1px;
+      border-style: solid;
+      border-color: theme-color($color);
+    }
+    &.sf-#{$color}-lighter-border {
+      border-color: theme-color-level($color, -3);
+    }
+    &.sf-#{$color}-darker-border {
+      border-color: theme-color-level($color, 3);
+    }
+
+    @each $direction in $sf-border-directions {
+      &.sf-#{$color}-border-#{$direction},
+      &.sf-#{$color}-lighter-border-#{$direction},
+      &.sf-#{$color}-darker-border-#{$direction} {
+        border-#{$direction}-width: 5px;
+        border-#{$direction}-style: solid;
+        border-#{$direction}-color: theme-color($color);
+      }
+      &.sf-#{$color}-lighter-border-#{$direction} {
+        border-#{$direction}-color: theme-color-level($color, -3);
+      }
+      &.sf-#{$color}-darker-border-#{$direction} {
+        border-#{$direction}-color: theme-color-level($color, 3);
+      }
+    }
+  }
+}

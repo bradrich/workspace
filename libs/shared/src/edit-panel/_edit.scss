@@ -1,0 +1,20 @@
+/* =================================================================================================
+Edit
+================================================================================================= */
+
+$sf-edit-position-right: 30px;
+$sf-edit-position-padding-bottom: 28px;
+
+[sfEditPanel] {
+  position: fixed;
+  right: $sf-edit-position-right;
+  overflow: hidden;
+  padding-bottom: $sf-edit-position-padding-bottom;
+  &.sf-scrollable {
+    overflow-y: auto;
+  }
+
+  .sf-content-card {
+    margin: 0 12px;
+  }
+}

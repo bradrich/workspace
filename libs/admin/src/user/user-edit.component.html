@@ -1,0 +1,164 @@
+<sf-spinner type="foldingCube" *ngIf="isLoading"></sf-spinner>
+
+<div
+  class="card sf-content-card sf-content-overflow sf-fade-in-up"
+  *ngIf="!isLoading && !(registerError$ | async) && !(userError$ | async) && user">
+  <div class="card-header bg-primary text-white d-flex flex-row align-items-center">
+
+    <h4 class="m-0" *ngIf="!isMultiple">{{user.id ? 'Edit User' : 'Create User'}}</h4>
+    <h4 class="m-0" *ngIf="isMultiple">
+      Multiple Edit
+      <mat-icon
+        class="sf-icon-sm"
+        [ngbPopover]="isMultipleInfoMessage"
+        placement="bottom"
+        container="body"
+        triggers="mouseenter:mouseleave">
+        help
+      </mat-icon>
+    </h4>
+
+    <button class="btn btn-icon btn-white ml-auto" (click)="cancelEdit.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+  <div class="card-body">
+
+    <form [formGroup]="form" (submit)="submit()" role="User Edit/Add Form">
+
+      <!-- Login -->
+      <div class="form-group" *ngIf="!isMultiple">
+        <label for="login">Login</label>
+        <input
+          id="login"
+          type="text"
+          class="form-control"
+          formControlName="login"
+          required
+          tabindex="1" />
+        <sf-error-messages [group]="form" controlName="login"></sf-error-messages>
+      </div>
+      <!-- End login -->
+
+      <!-- First name -->
+      <div class="form-group" *ngIf="!isMultiple">
+        <label for="firstName">First name</label>
+        <input
+          id="firstName"
+          type="text"
+          class="form-control"
+          formControlName="firstName"
+          required
+          tabindex="2" />
+        <sf-error-messages [group]="form" controlName="firstName"></sf-error-messages>
+      </div>
+      <!-- End first name -->
+
+      <!-- Last name -->
+      <div class="form-group" *ngIf="!isMultiple">
+        <label for="lastName">Last name</label>
+        <input
+          id="lastName"
+          type="text"
+          class="form-control"
+          formControlName="lastName"
+          required
+          tabindex="3" />
+        <sf-error-messages [group]="form" controlName="lastName"></sf-error-messages>
+      </div>
+      <!-- End last name -->
+
+      <!-- Email -->
+      <div class="form-group" *ngIf="!isMultiple">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          required
+          tabindex="4" />
+        <sf-error-messages [group]="form" controlName="email"></sf-error-messages>
+      </div>
+      <!-- End email -->
+
+      <!-- Password -->
+      <div class="form-group" *ngIf="!isMultiple">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="text"
+          class="form-control"
+          formControlName="password"
+          required
+          tabindex="5" />
+        <sf-error-messages [group]="form" controlName="password"></sf-error-messages>
+      </div>
+      <!-- End password -->
+
+      <!-- Authorities -->
+      <div class="form-group">
+        <label for="authorities">Authorities</label>
+        <mat-chip-list id="authorities" class="sf-no-focus" multiple="true">
+          <mat-chip
+            *ngFor="let authority of authorities"
+            class="sf-cursor-pointer"
+            [color]="getUserAuthorityChipColor(authority)"
+            selectable="true"
+            [selected]="form.get('authorities').value.indexOf(authority) > -1"
+            (click)="userAuthoritySelectionChange(authority)">
+            {{authority}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <!-- End authorities -->
+
+      <!-- Activated -->
+      <div class="form-group mt-4">
+        <mat-slide-toggle
+          id="activated"
+          formControlName="activated"
+          color="info"
+          aria-label="Activated"
+          [ngClass]="{ 'sf-success': isMultiple && user.activated !== form.get('activated').value }">
+          Activated
+        </mat-slide-toggle>
+      </div>
+      <!-- End activated -->
+
+      <div class="d-flex flex-column flex-md-row align-items-md-center mt-5">
+
+        <sf-form-buttons
+          class="d-flex flex-column flex-md-row align-items-md-center mr-auto"
+          useIcons="true"
+          [group]="form"
+          [isSaving]="(registerPending$ | async) || (userPending$ | async)"
+          (save)="submit()"
+          (cancel)="cancel()">
+        </sf-form-buttons>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteUsers.emit(users)"
+          [ngbTooltip]="isMultiple ? 'Delete Multiple Users' : 'Delete User'"
+          placement="bottom"
+          container="body"
+          *ngIf="isMultiple || user.id">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<sf-error
+  title="Error"
+  message="There was an error selecting the user(s)."
+  showRefresh="false"
+  *ngIf="!isLoading && ((registerError$ | async) || (userError$ | async) || !user)">
+</sf-error>

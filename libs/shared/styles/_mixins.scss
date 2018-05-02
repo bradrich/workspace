@@ -1,0 +1,12 @@
+/* =================================================================================================
+Mixins
+================================================================================================= */
+
+@mixin sf-content() {
+  position: relative;
+  display: flex !important;
+  flex: 1 0 auto !important;
+  flex-direction: column !important;
+  box-sizing: border-box;
+  padding: $sf-content-padding;
+}

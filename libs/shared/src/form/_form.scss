@@ -1,0 +1,119 @@
+/* =================================================================================================
+Form
+================================================================================================= */
+
+// Material Design select
+.mat-select.sf-icon-select {
+  display: flex;
+  .mat-select-value, mat-select-trigger {
+    display: flex;
+    align-items: center;
+  }
+  .mat-select-value {
+    min-width: 40px;
+  }
+}
+.mat-option:hover {
+  background-color: $gray-200;
+}
+.mat-option-text {
+  display: flex;
+  align-items: center;
+}
+.mat-select-panel {
+  background-color: $gray-100;
+}
+
+// Material design checkbox
+.mat-checkbox-checked {
+  @each $color, $value in $theme-colors {
+    &.mat-#{$color} .mat-checkbox-background {
+      background-color: $value;
+    }
+  }
+}
+.mat-checkbox-disabled {
+  cursor: $sf-cursor-not-allowed !important;
+  &:not(.mat-checkbox-checked) .mat-checkbox-frame {
+    border-color: $medium-2;
+  }
+}
+// Material design slide-toggle
+.mat-slide-toggle {
+  .mat-slide-toggle-bar {
+    background-color: rgba($black, 0.38);
+  }
+  .mat-slide-toggle-thumb {
+    background-color: $gray-100;
+    @include mat-elevation(1);
+  }
+
+  @each $color, $value in $theme-colors {
+    &.mat-checked.mat-#{$color} {
+      .mat-slide-toggle-bar {
+        background-color: rgba($value, 0.5);
+      }
+      .mat-slide-toggle-thumb {
+        background-color: $value;
+      }
+    }
+  }
+}
+
+// NGBootstrap datepicker
+.sf-flex-calendar {
+  .d-block {
+    display: flex !important;
+  }
+  .ngb-dp-month {
+    flex: 1;
+  }
+  ngb-datepicker-month-view {
+    flex: 1;
+    flex-direction: column;
+  }
+  .ngb-dp-weekday, .ngb-dp-day {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex: 1;
+  }
+}
+.custom-select {
+  background-position-x: 96%;
+}
+
+// Input group
+.input-group {
+  .btn.btn-icon {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-group-text {
+    padding-top: 2px;
+    padding-bottom: 0;
+  }
+}
+
+// Label
+.form-group {
+  label .mat-icon {
+    transform: translateY(3px);
+  }
+}
+
+// Form control
+.form-control:focus {
+  box-shadow: none;
+}
+
+// Miscellaneous
+.sf-remind-date-checkbox {
+  margin-top: 0.75rem;
+}
+.sf-narrow-input {
+  width: 50px;
+}
+.sf-small-text {
+  font-size: 80%;
+}

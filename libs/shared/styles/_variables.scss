@@ -1,0 +1,109 @@
+/* =================================================================================================
+Variables
+================================================================================================= */
+
+// Borders
+$sf-border-directions: top, right, bottom, left !default;
+$sf-border-radius-directions: top, top-right, right, bottom-right, bottom, bottom-left, left, top-left !default;
+
+// Colors - Grays
+$white: #ffffff !default;
+$gray-100: #fbfbfb !default;
+$gray-125: #f0f0f0 !default;
+$gray-150: #efefef !default;
+$gray-175: #e0e0e0 !default;
+$gray-200: #d1d1d1 !default;
+$gray-300: #c0c0c0 !default;
+$gray-350: #bdbdbd !default;
+$gray-400: #a9a9a9 !default;
+$gray-500: #8b8b8b !default;
+$gray-600: #757575 !default;
+$gray-700: #616161 !default;
+$gray-800: #424242 !default;
+$gray-850: #363636 !default;
+$gray-900: #222222 !default;
+$gray-950: #0e0e0e !default;
+$black: #000000 !default;
+$grays: (
+  '100': $gray-100,
+  '125': $gray-125,
+  '150': $gray-150,
+  '175': $gray-175,
+  '200': $gray-200,
+  '300': $gray-300,
+  '350': $gray-350,
+  '400': $gray-400,
+  '500': $gray-500,
+  '600': $gray-600,
+  '700': $gray-700,
+  '800': $gray-800,
+  '850': $gray-850,
+  '900': $gray-900,
+  '950': $gray-950
+) !default;
+
+// Colors - Miscellaneous
+$green: #4cac42 !default;
+$red: #cb0909 !default;
+
+// Colors - Theme
+$primary: #9c182f !default;
+$secondary: #e5546d !default;
+$success: $green !default;
+$info: #6a98c5 !default;
+$warning: #ec8f21 !default;
+$danger: $red !default;
+$light: $gray-150 !default;
+$medium: $gray-200 !default;
+$medium-2: $gray-400 !default;
+$dark: $gray-900 !default;
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'medium': $medium,
+  'medium-2': $medium-2,
+  'dark': $dark
+) !default;
+
+// Colors - Body
+$body-bg: $dark !default;
+$body-color: $dark !default;
+
+// Card
+$card-border-width: 0 !default;
+$card-bg: $gray-100 !default;
+
+// Cursors
+$sf-cursor-default: default !default;
+$sf-cursor-pointer: pointer !default;
+$sf-cursor-move: move !default;
+$sf-cursor-grab: grab !default;
+$sf-cursor-not-allowed: not-allowed !default;
+$sf-cursor-disabled: $sf-cursor-not-allowed !default;
+
+// Elevation
+$sf-elevations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 !default;
+
+// Form
+$input-border-color: $gray-300 !default;
+$input-disabled-bg: $gray-150 !default;
+
+// Layout
+$sf-content-padding: 40px 25px 54px !default;
+
+// Pagination
+$pagination-padding-y-sm: calc(0.25rem + 1px) !default;
+$pagination-padding-x-sm: calc(0.5rem + 1px) !default;
+$pagination-focus-box-shadow: none !default;
+
+// Spinkit
+$spinkit-spinner-color: $gray-300 !default;
+
+// Type
+$headings-font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$headings-font-weight: 400 !default;

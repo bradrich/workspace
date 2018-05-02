@@ -1,0 +1,44 @@
+<sf-spinner
+  type="foldingCube"
+  *ngIf="(pending$ | async) && !(error$ | async)">
+</sf-spinner>
+
+<div
+  class="container-fluid"
+  *ngIf="!(pending$ | async) && (health$ | async)?.length && !(error$ | async)">
+  <div class="row">
+    <div class="col">
+
+      <!-- Content card -->
+      <div class="card sf-content-card sf-fade-in-up">
+        <div class="card-body">
+
+          <sf-table
+            class="d-flex flex-column"
+            [config]="tableConfig"
+            title="Health data"
+            [entities]="health$ | async"
+            [selectedEntities]="selectedHealth$ | async"
+            (selectEntities)="selectHealth($event)">
+          </sf-table>
+
+        </div>
+      </div>
+      <!-- End content card -->
+
+    </div>
+  </div>
+</div>
+
+<!-- No results -->
+<sf-no-results
+  class="sf-fade-in-up"
+  title="No Health Data"
+  showCreateEntity="false"
+  *ngIf="!(pending$ | async) && !(health$ | async)?.length && !(error$ | async)">
+</sf-no-results>
+<!-- End no results -->
+
+<!-- Error -->
+<sf-error class="sf-fade-in-up" *ngIf="!(pending$ | async) && (error$ | async)"></sf-error>
+<!-- End error -->

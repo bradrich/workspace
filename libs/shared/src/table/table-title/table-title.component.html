@@ -1,0 +1,89 @@
+<div class="d-flex flex-row align-items-center flex-wrap sf-table-title mb-3" *ngIf="!hideTitle">
+
+  <!-- Title text -->
+  <h4 class="m-0">
+    <span class="mr-3">{{title}}</span>
+    <small *ngIf="!hideTitleExtras">
+      <span class="mr-3">|</span>
+      <span class="mr-3">
+        {{totalItems ? totalItems : entities?.length}} total
+      </span>
+      <span *ngIf="selectedCount > 0">
+        <span class="mr-3">|</span>
+        {{selectedCount}} selected
+      </span>
+    </small>
+  </h4>
+  <!-- End title text -->
+
+  <!-- Actions -->
+  <div class="d-flex flex-row align-items-center ml-auto">
+
+    <!-- Table options -->
+    <div ngbDropdown *ngIf="showTableOptions">
+      <button
+        id="tableOptionsDropdown"
+        class="btn btn-icon"
+        ngbDropdownToggle
+        ngbTooltip="View options"
+        placement="bottom"
+        container="body">
+        <mat-icon>view_column</mat-icon>
+      </button>
+      <div ngbDropdownMenu aria-labelledby="showTableOptions">
+        <button
+          class="dropdown-item"
+          *ngFor="let column of (columns | filter:true:'showInViewOptions'); let $index = index;">
+
+          <mat-checkbox
+            class="mt-2 mr-2"
+            [(ngModel)]="column.show"
+            (click)="column.show = !column.show; $event.stopPropagation()">
+          </mat-checkbox>
+          {{column.header}}
+
+        </button>
+      </div>
+    </div>
+    <!-- End table options -->
+
+    <!-- Search -->
+    <!-- TODO: <sf-search
+      class="d-flex flex-column"
+      searchClass="m-0"
+      beginCollapsed="true"
+      [isSearching]="isSearching"
+      (search)="search.emit($event)"
+      (searchReset)="searchReset.emit($event)"
+      *ngIf="showSearch">
+    </sf-search> -->
+    <!-- End search-->
+
+    <!-- Delete -->
+    <button
+      class="btn btn-icon ml-3"
+      ngbTooltip="Delete"
+      placement="bottom"
+      container="body"
+      (click)="deleteEntities.emit()"
+      *ngIf="selectedCount > 0 && showDeleteEntities">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <!-- End delete -->
+
+    <!-- Create -->
+    <button
+      class="btn btn-raised btn-mini-fab btn-primary ml-3"
+      ngbTooltip="Create"
+      placement="bottom"
+      container="body"
+      (click)="createEntity.emit()"
+      *ngIf="showCreateEntity">
+      <mat-icon>add</mat-icon>
+    </button>
+    <!-- End create -->
+
+  </div>
+  <!-- End actions -->
+
+</div>

@@ -1,0 +1,75 @@
+<nav aria-label="pagination">
+  <ul
+    class="pagination m-0"
+    [ngClass]="{ 'pagination-sm': 'sm' === size, 'pagination-lg': 'lg' === size }">
+
+    <li class="page-item" *ngIf="boundaryLinks">
+      <a
+        class="page-link"
+        [ngClass]="{ 'disabled': !hasPrevious() }"
+        href
+        (click)="!!selectPage(1)"
+        [attr.tabindex]="hasPrevious() ? null : '-1'"
+        aria-label="First">
+        <mat-icon aria-hidden="true">first_page</mat-icon>
+        <span class="sr-only">First</span>
+      </a>
+    </li>
+
+    <li class="page-item" *ngIf="directionLinks">
+      <a
+        class="page-link"
+        [ngClass]="{ 'disabled': !hasPrevious() }"
+        href
+        (click)="!!selectPage(page - 1)"
+        [attr.tabindex]="hasPrevious() ? null : '-1'"
+        aria-label="Previous">
+        <mat-icon aria-hidden="true">chevron_left</mat-icon>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+
+    <li [hidden]="'slim' === type" *ngFor="let pageNumber of pages">
+      <a
+        [ngClass]="{ 'active': pageNumber === page, 'disabled': isEllipsis(pageNumber) }"
+        *ngIf="isEllipsis(pageNumber)">
+        ...
+      </a>
+      <a
+        class="page-link"
+        [ngClass]="{ 'active': pageNumber === page, 'disabled': isEllipsis(pageNumber) }"
+        href
+        (click)="!!selectPage(pageNumber)"
+        *ngIf="!isEllipsis(pageNumber)">
+        {{pageNumber}}
+      </a>
+    </li>
+
+    <li class="page-item" *ngIf="directionLinks">
+      <a
+        class="page-link"
+        [ngClass]="{ 'disabled': !hasNext() }"
+        href
+        (click)="!!selectPage(page + 1)"
+        [attr.tabindex]="hasNext() ? null : '-1'"
+        aria-label="Next">
+        <mat-icon aria-hidden="true">chevron_right</mat-icon>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+
+    <li class="page-item" *ngIf="boundaryLinks">
+      <a
+        class="page-link"
+        [ngClass]="{ 'disabled': !hasNext() }"
+        href
+        (click)="!!selectPage(pageCount)"
+        [attr.tabindex]="hasNext() ? null : '-1'"
+        aria-label="Last">
+        <mat-icon aria-hidden="true">last_page</mat-icon>
+        <span class="sr-only">Last</span>
+      </a>
+    </li>
+
+  </ul>
+</nav>

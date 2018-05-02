@@ -1,0 +1,34 @@
+/* =================================================================================================
+Header
+================================================================================================= */
+
+@import
+  'shared/styles/variables',
+  'shared/styles/mixins',
+  '@angular/material/theming',
+  'bootstrap/scss/functions',
+  'bootstrap/scss/variables',
+  'bootstrap/scss/mixins';
+
+$sf-header-padding: 0.75rem calc(2rem + 1rem / 2) 0.75rem calc(5rem + 2px);
+
+:host {
+  z-index: 20;
+  padding: $sf-header-padding;
+  min-height: 4rem;
+  background-color: $gray-100;
+
+  @include mat-elevation(2);
+
+  &.sf-sidenav-opened {
+    padding: 0.75rem calc(2rem + 1rem / 2);
+  }
+
+  .sf-app-name {
+    color: $primary;
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    padding: $sf-header-padding;
+  }
+}

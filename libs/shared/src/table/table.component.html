@@ -1,0 +1,169 @@
+<!-- Title - TODO: add search -->
+<sf-table-title
+  class="d-flex flex-column"
+  [title]="title"
+  [hideTitle]="hideTitle"
+  [hideTitleExtras]="hideTitleExtras"
+  [entities]="entities"
+  [totalItems]="totalItems"
+  [showTableOptions]="showTableOptions"
+  [showCreateEntity]="showCreateEntity"
+  (createEntity)="createEntity.emit()"
+  [columns]="config.columns">
+</sf-table-title>
+<!-- End title -->
+
+<!-- TODO: Search <sf-spinner type="foldingCube" *ngIf="isSearching"></sf-spinner> -->
+
+<div class="table-responsive" *ngIf="entities?.length">
+  <table class="table table-sm table-hover table-striped table-vertical-align-middle">
+
+    <!-- Table head row -->
+    <sf-table-head-row
+      [columns]="config.columns"
+      [predicate]="predicate"
+      [reverse]="reverse"
+      (sort)="handleSort($event)"
+      [selectionModel]="selectionModel"
+      [areAllEntitiesSelected]="areAllEntitiesSelected()"
+      (selectEntities)="handleEntitySelection($event)">
+    </sf-table-head-row>
+    <!-- End table head row -->
+
+    <!-- Quick add -->
+    <sf-table-quick-add
+      [config]="config"
+      [quickAddModel]="quickAddModel"
+      [isQuickAddSaving]="isQuickAddSaving"
+      (quickAddSave)="quickAddSave.emit($event)"
+      *ngIf="config.quickAdd">
+    </sf-table-quick-add>
+    <!-- End quick add -->
+
+    <tbody>
+
+      <tr
+        *ngFor="let entity of entities; let i = index; trackBy: setTrackBy;"
+        [ngClass]="{ 'sf-cursor-pointer': config.rowClick, 'table-info': selectionModel.isSelected(entity) }"
+        (click)="rowClick(entity)">
+
+        <td
+          *ngFor="let column of (config.columns | filter:true:'show'); let $index = index;"
+          [ngClass]="getColumnClass(column)"
+          [attr.aria-label]="column.label">
+
+          <!-- Text column -->
+          <sf-table-text-column
+            [column]="column"
+            [entity]="entity"
+            [specialEntity]="specialEntity"
+            *ngIf="column.type === 'text'">
+          </sf-table-text-column>
+          <!-- End text column -->
+
+          <!-- Date column -->
+          <span *ngIf="column.type === 'date' && column.dateFormat">
+            {{entity[column.model] | date:column.dateFormat}}
+          </span>
+          <!-- End date column -->
+
+          <!-- Function column -->
+          <span
+            [innerHTML]="column.func(injector, entity)"
+            *ngIf="column.type === 'function' && column.func">
+          </span>
+          <!-- End function column -->
+
+          <!-- Selection column -->
+          <mat-checkbox
+            color="info"
+            (click)="$event.stopPropagation()"
+            (change)="$event ? handleEntitySelection({ entity: entity }) : null"
+            [checked]="selectionModel.isSelected(entity)"
+            [disabled]="column.isDisabled(entity, specialEntity)"
+            aria-label="Select"
+            *ngIf="column.type === 'selection'">
+          </mat-checkbox>
+          <!-- End selection column -->
+
+          <!-- Icon column -->
+          <mat-icon
+            class="mt-1"
+            [color]="column.icon.color(entity)"
+            [ngbTooltip]="column.tooltip(entity)"
+            placement="bottom"
+            container="body"
+            *ngIf="column.type === 'icon' && column.icon">
+            {{column.icon.type(entity)}}
+          </mat-icon>
+          <!-- End icon column -->
+
+          <!-- Badge column -->
+          <sf-table-badge-column
+            [column]="column"
+            [entity]="entity"
+            *ngIf="column.type === 'badge' && column.badge">
+          </sf-table-badge-column>
+          <!-- End badge column -->
+
+          <!-- Button column -->
+          <sf-table-button-column
+            [column]="column"
+            [entity]="entity"
+            [specialEntity]="specialEntity"
+            (buttonClick)="buttonClick.emit($event)"
+            *ngIf="column.type === 'button' && column.button">
+          </sf-table-button-column>
+          <!-- End button column -->
+
+          <!-- Link column -->
+          <sf-table-link-column
+            [column]="column"
+            [entity]="entity"
+            (buttonClick)="buttonClick.emit($event)"
+            *ngIf="column.type === 'link' && column.link">
+          </sf-table-link-column>
+          <!-- End link column -->
+
+          <!-- Repeat column -->
+          <sf-table-repeat-column
+            [column]="column"
+            [entity]="entity"
+            *ngIf="column.type === 'repeat'">
+          </sf-table-repeat-column>
+          <!-- End repeat column -->
+
+          <!-- Time ago column -->
+          <sf-table-time-ago-column
+            [column]="column"
+            [entity]="entity"
+            *ngIf="column.type === 'timeAgo' && column.timeAgo">
+          </sf-table-time-ago-column>
+          <!-- End time ago column -->
+
+          <!-- Audio player column -->
+          <!-- TODO: Audio player <sf-table-audio-player-column
+            [column]="column"
+            [entity]="entity"
+            *ngIf="column.type === 'audioPlayer'">
+          </sf-table-audio-player-column> -->
+          <!-- End audio player column -->
+
+          <!-- Menu column -->
+          <sf-table-menu-column
+            [column]="column"
+            [entity]="entity"
+            [specialEntity]="specialEntity"
+            (menuClick)="actionMenuClick.emit($event)"
+            *ngIf="column.type === 'menu' && column.menu">
+          </sf-table-menu-column>
+          <!-- End menu column -->
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+</div>

@@ -1,0 +1,54 @@
+/* =================================================================================================
+Table
+================================================================================================= */
+
+@import
+  'shared/styles/variables',
+  'shared/styles/mixins',
+  '@angular/material/theming',
+  'bootstrap/scss/functions',
+  'bootstrap/scss/variables',
+  'bootstrap/scss/mixins';
+
+.table {
+  &.table-vertical-align-middle tbody tr {
+    th, td {
+      vertical-align: middle;
+    }
+  }
+
+  th, td {
+    &.sf-narrow {
+      padding: 0.75rem 0.35rem;
+    }
+    &.sf-checkbox-column {
+      padding-left: 12px;
+      width: 40px;
+    }
+    &.sf-icon-column {
+      width: 56px;
+    }
+    &.sf-shrink {
+      min-width: 115px;
+      width: 0.1%;
+      white-space: nowrap;
+
+      .mat-chip-list-wrapper {
+        flex-wrap: nowrap;
+      }
+    }
+
+    > * {
+      display: table-cell;
+    }
+  }
+
+  // Form items
+  .mat-checkbox label.mat-checkbox-layout {
+    margin: 0;
+  }
+}
+
+.table-responsive {
+  overflow-x: visible;
+}
